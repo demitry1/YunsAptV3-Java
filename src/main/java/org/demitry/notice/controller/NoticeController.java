@@ -5,6 +5,8 @@ import org.demitry.notice.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,7 +24,7 @@ public class NoticeController {
     }
 
     //공지사항 리스트페이지
-    @RequestMapping("notice")
+    @GetMapping("notice")
     public String notice(Model model) {
         List<NoticeDto> noticeList = noticeService.getNoticeList();
         model.addAttribute("noticeList", noticeList);
@@ -30,19 +32,19 @@ public class NoticeController {
     }
 
     //공지사항 상세페이지
-    @RequestMapping(value = "noticeDetail", method = RequestMethod.GET)
+    @GetMapping("noticeDetail")
     public String noticeDetail(){
         return "notice/noticeDetail";
     }
 
     //공지사항 입력
-    @RequestMapping(value = "noticeInsert", method = RequestMethod.GET)
+    @GetMapping("noticeInsert")
     public String noticeInsert(){
         return "notice/noticeInsert";
     }
 
     //공지사항 수정페이지
-    @RequestMapping("noticeModify")
+    @PostMapping("noticeModify")
     public String noticeModify(){
         return "notice/noticeModify";
     }
