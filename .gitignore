@@ -1,0 +1,7 @@
+.idea/
+out/
+target/
+src/main/resources/properties/
+*.log
+*.pdf
+*.zip

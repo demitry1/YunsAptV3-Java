@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+               "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notice_db">
+    <!--<select id="getNoticeList" parameterType="org.demitry.notice.dto.NoticeDto">-->
+    <select id="notice_dao_getNoticeList" resultType="org.demitry.notice.dto.NoticeDto" parameterType="Map">
+        <![CDATA[
+            select * from apt_notice_view
+            where rownum between #{nfrom} and #{nto}
+            order by regdate desc
+        ]]>
+    </select>
+</mapper>
