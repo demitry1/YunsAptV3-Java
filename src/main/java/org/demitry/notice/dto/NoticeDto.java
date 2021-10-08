@@ -15,7 +15,7 @@ public class NoticeDto {
     private int id;
     private String title;
     private String writer_id;
-    private Date regdate;
+    private String regdate;
     private String hit;
     private String files;
     private String content ;

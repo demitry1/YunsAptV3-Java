@@ -54,11 +54,11 @@
                                 <form action="/notice/notice" method="get">
                                     <div class="input-group">
                                         <select id="find-notice" class="form-select-ksy" name="nFindSel">
-                                            <option ${(param.nFIndSel == "title")?"selected":"" } value="title">제목</option>
-                                            <option ${(param.nFIndSel == "writer_id")?"selected":"" } value="writer_id">작성자</option>
+                                            <option ${(param.nFindSel == "title")?"selected":"" } value="title">제목</option>
+                                            <option ${(param.nFindSel == "writer_id")?"selected":"" } value="writer_id">작성자</option>
                                         </select>
                                         <input type="text" class="form-control" name="nSearch" value="${param.nSearch }" placeholder="검색할 단어를 입력하세요">
-                                        <button class="btn btn-outline-primary" type="button" name="nSearchCmd" id="nSearchCmd">검색</button>
+                                        <button class="btn btn-outline-primary" type="submit" name="cmd" value="nSearchCmd" id="nSearchCmd">검색</button>
                                     </div>
                                 </form>
                             </div>
@@ -106,8 +106,8 @@
                                     <div class="col-sm-8">
                                         <c:set var="page" value="${(empty param.page)?1:param.page}"/>
                                         <c:set var="startNum" value="${page - (page-1)%5 }"/>			
-                                        <c:set var="lastNum" value="${fn:substringBefore(Math.ceil(count/10),'.') }"/>			
-                                        <div><span class="text-orange text-strong">${(empty param.page)?1:param.page}</span> of ${lastNum } pages(${count}건 검색 / 총 ${total_count}건 중)</div>
+                                        <c:set var="lastNum" value="${fn:substringBefore(Math.ceil(qCount/10),'.') }"/>
+                                        <div><span class="text-orange text-strong">${(empty param.page)?1:param.page}</span> of ${lastNum } pages(${qCount}건 검색 / 총 ${totCount}건 중)</div>
                                     </div>
                                     <div class="col-sm-2"> 
                                         <a href="/notice/noticeInsert">

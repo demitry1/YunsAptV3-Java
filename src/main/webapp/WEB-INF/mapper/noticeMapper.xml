@@ -4,12 +4,39 @@
                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="notice_db">
-    <!--<select id="getNoticeList" parameterType="org.demitry.notice.dto.NoticeDto">-->
+    <!--공지사항 리스트조회-->
     <select id="notice_dao_getNoticeList" resultType="org.demitry.notice.dto.NoticeDto" parameterType="Map">
         <![CDATA[
-            select * from apt_notice_view
-            where rownum between #{nfrom} and #{nto}
-            order by regdate desc
+            SELECT ID, TITLE, WRITER_ID, TO_CHAR(REGDATE,'YYYY-MM-DD') REGDATE, HIT, FILES, CONTENT, PUB
+              FROM ( SELECT ROWNUM NUM, N.*  FROM
+                     ( SELECT * FROM APT_NOTICE
+                        WHERE ${nFindSel} LIKE #{nSearch} ORDER BY REGDATE DESC ) N )
+            WHERE NUM BETWEEN #{nFrom} AND #{nTo}
         ]]>
     </select>
+    <!--공지사항 카운트 -->
+    <select id="notice_getNoticeCount" resultType="Integer" parameterType="Map">
+        <![CDATA[
+            SELECT COUNT(ID) COUNT FROM APT_NOTICE
+              WHERE ${nFindSel} LIKE #{nSearch}
+            UNION ALL
+            SELECT COUNT(ID) cnt FROM APT_NOTICE
+        ]]>
+    </select>
+    <!--공지사항 세부조회-->
+    <select id="notice_getNoticeDetail" resultType="org.demitry.notice.dto.NoticeDto" >
+        <![CDATA[
+            SELECT ID, TITLE, WRITER_ID, TO_CHAR(REGDATE,'YYYY-MM-DD') REGDATE, HIT, FILES, CONTENT
+             FROM APT_NOTICE
+            WHERE ID = #{nid}
+        ]]>
+    </select>
+    <!--공지사항 조회수 갱신-->
+    <update id="notice_updateHitCount" parameterType="Map">
+        <![CDATA[
+            UPDATE APT_NOTICE SET HIT = #{nHit} WHERE ID = #{nId}
+        ]]>
+    </update>
+
+
 </mapper>

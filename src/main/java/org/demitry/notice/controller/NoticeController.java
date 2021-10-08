@@ -5,10 +5,7 @@ import org.demitry.notice.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,15 +22,26 @@ public class NoticeController {
 
     //공지사항 리스트페이지
     @GetMapping("notice")
-    public String notice(Model model) {
-        List<NoticeDto> noticeList = noticeService.getNoticeList();
+    public String notice(@RequestParam(value = "nFindSel", defaultValue = "title", required = false) String nFindSel,
+                         @RequestParam(value = "nSearch", defaultValue = "", required = false) String nSearch,
+                         @RequestParam(value = "page", defaultValue = "1", required = false) int page,
+                         Model model) {
+        List<NoticeDto> noticeList = noticeService.getNoticeList(nFindSel, nSearch, page); //공지사항 리스트
+        List<Integer> noticeCount  = noticeService.getNoticeCount(nFindSel, nSearch); //공지사항 카운트
+
         model.addAttribute("noticeList", noticeList);
+        model.addAttribute("qCount", noticeCount.get(0)); //검색카운트
+        model.addAttribute("totCount", noticeCount.get(1)); //총카운트
         return "notice/notice";
     }
 
     //공지사항 상세페이지
     @GetMapping("noticeDetail")
-    public String noticeDetail(){
+    public String noticeDetail(@RequestParam(value = "id") int id,
+                               Model model) {
+        List<NoticeDto> noticeDetail = noticeService.getNoticeDetail(id); //공지사항 세부내역
+
+        model.addAttribute("noticeDetail", noticeDetail);
         return "notice/noticeDetail";
     }
 

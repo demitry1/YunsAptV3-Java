@@ -79,6 +79,16 @@
                                         <i class="fas fa-minus fa-sm"></i>
                                     </button>
                                     <input class="form-control mt-1" type="file" name="file" id="noticeFile1">
+                          <%--          <div class="row">
+                                        <div class="col-md-11">
+                                            <input class="form-control mt-1" type="file" name="file" id="noticeFile1">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button type="button" class="btn btn-danger waves-effect waves-light mt-1" id="minusFile" data-bs-toggle="tooltip" data-bs-placement="top" title="첨부제거">
+                                                <i class="fas fa-minus fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>--%>
                                 </div>
                                 <div class="mb-3">
                                     <label for="noticeContent" class="form-label form-control-label text-primary">내용</label>

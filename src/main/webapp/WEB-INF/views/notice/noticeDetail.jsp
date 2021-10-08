@@ -66,22 +66,24 @@
                         <div class="card dashboard-product font-weight-bold mx-3">
                             <form action="/notice/noticeDetail" method="post">
                                 <!-- 상세조회 -->
+                                <c:forEach var="n" items="${noticeDetail}">
                                 <div class="mb-3">
                                     <label for="noticeTitle" class="form-label form-control-label text-primary">제목</label>
-                                    <input type="text" class="form-control" name="title" id="noticeTitle" readonly value="사이트가 오픈되었습니다 1">
+                                    <input type="text" class="form-control" name="title" id="noticeTitle" readonly value="${n.title}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="noticeRegdate" class="form-label form-control-label text-primary">작성일</label>
-                                    <input type="text" class="form-control" name="regdate" id="noticeRegdate" readonly value="2021-09-04">
+                                    <input type="text" class="form-control" name="regdate" id="noticeRegdate" readonly value="${n.regdate}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="noticeFile1" class="form-label form-control-label text-primary">첨부파일</label>
-                                    <input type="text" class="form-control" name="file1" id="noticeFile1" readonly value="1111.pdf">
+                                    <input type="text" class="form-control" name="file1" id="noticeFile1" readonly value="${n.files}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="noticeContent" class="form-label form-control-label text-primary">내용</label>
-                                    <textarea class="form-control" name="content" id="noticeContent" style="height: 180px;" readonly >공지사항 상세내용입니다</textarea>
+                                    <textarea class="form-control" name="content" id="noticeContent" style="height: 180px;" readonly >${n.content}</textarea>
                                 </div>
+                                </c:forEach>
                                 <!-- 저장, 목록버튼-->
                                 <div class="row justify-content-center"> 
                                     <div class="col-md-2">
